@@ -30,7 +30,7 @@ body {
 	float: left;
 	margin-left: 2px;
 }
-/* border attributes of the demoBox */
+/* border properties of the demoBox */
 
 .bd-green {
 	border-color: green;
@@ -39,13 +39,14 @@ body {
 	border-color: black;
 }
 .bd-visible {
-	border-width: 2px;
-	border-style: solid;;
+	border-width: 5px;
+	border-style: solid;
 }
 .bd-invisible {
 	border: none;
 }
-/* background atributes of demoBox */
+
+/* background properties of demoBox */
 .bg-white {
 	background-color: white;
 }

@@ -37,11 +37,11 @@ function loadData() {
 							5,
 							100);
 	var ch3 = new Character('Darth Valder',
-							8,
+							20,
 							20,
 							150);
 	var ch4 = new Character('Darth Maul',
-							8,
+							15,
 							20,
 							180);
 
@@ -87,7 +87,7 @@ $(document).ready(function () {
 		
 	//} else {
 		// Handle events
-		$('.characters').on('click', function () {
+		$('.character').on('click', function () {
 		//value1 = $(this).val();
 		//value2 = $('div.enemies').val();
 			value1 = $(this).attr('value');
@@ -97,7 +97,7 @@ $(document).ready(function () {
 			obj = $(this);
 
 		});
-		$('.enemies').on('click', function () {
+		$('.enemy').on('click', function () {
 			value1 = $(this).attr('value');
 			console.log('.enemies value:' + value1);
 		});
