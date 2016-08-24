@@ -12,7 +12,11 @@ body {
 * {
   box-sizing: border-box;
 }
-
+#wrapper {
+	width: 700px;
+	margin: 0 auto;
+	border: 1px solid;
+}
 #header {
 	background: #cccccc;
 	text-align: center;
@@ -20,15 +24,17 @@ body {
 	font-size: 24px;
 	margin-bottom: 5px;
 }
-.row {
+
+.row-with-height {
 	display: inline-box;
-	height: 125px;
+	height: 160px;	
 }
 .demoBox {
-	height: 120px;
-	width: 120px;
+	height: 150px;
+	width: 150px;
 	float: left;
 	margin-left: 2px;
+	line-height: 1;
 }
 /* border properties of the demoBox */
 
@@ -42,9 +48,6 @@ body {
 	border-width: 5px;
 	border-style: solid;
 }
-.bd-invisible {
-	border: none;
-}
 
 /* background properties of demoBox */
 .bg-white {
@@ -56,26 +59,27 @@ body {
 .bg-red {
 	background-color: red;
 }
-/*
-.bg-transparent {
-	opacity: 0;
+/* text color of demoBox */
+.text-white {
+	color: white;
 }
-*/
-/*
-.emptyBox {
-	height: 120px;
-	width: 120px;
-	float: left;;
-	margin-left: 2px;
+/* elements inside demoBox */
+.img-holder {
+	height: 80%;
+	width: 80%;
+	background-color: blue;
+	margin: 0 auto;
 }
-*/
-/*
-button {
-	border: none;
-	background: green;
-	color: #ffffff;
+h4#name, h4#HP {
+	font-size: 15px;
+	line-height: 1;
+	text-align: center;
 }
-*/
+/* ----------------------- */
+h2, h3 {
+	margin-top: 5px;
+	clear: left;
+}
 h2 {
 
 	font-size: 20px;
@@ -83,3 +87,5 @@ h2 {
 h3 {
 	font-size: 14px;
 }
+
+
