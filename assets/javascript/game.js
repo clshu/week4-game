@@ -144,27 +144,27 @@ function createFirstPage() {
 	var rowObj, boxObj, button;
 
 	$('#wrapper').append(line1);
-
+	// create row1, populate it with characterArray
 	rowObj = createRow('row row-with-height', 'row1');
 	appendBoxes(rowObj, characterClasses, characterArray);
 	$('#wrapper').append(rowObj);	
 	$('#wrapper').append(line2);
-	// Add 2nd row for demoBox, but it's invisble because no height for now
+	// Add row2, but it's invisble because no height for now
 	rowObj = createRow('row', 'row2');
 	$('#wrapper').append(rowObj);
 
 	$('#wrapper').append(line3);
-
+	// Add Atack button
 	button = createButton(attackId);
 	$('#wrapper').append(button);
 
 	$('#wrapper').append(line4);
-
+	// create row3 and populate it with an emptyBox so it can handle click event
 	rowObj = createRow('row row-with-height', 'row3');
 	boxObj = createBox(emptyBoxClasses, 0, null);
 	rowObj.append(boxObj);
 	$('#wrapper').append(rowObj);
-
+	// message line
 	$('#wrapper').append('<h3 id="message"></h3>');
 
 }
@@ -176,70 +176,81 @@ $(document).ready(function () {
 		// Handle events
 		// Events bubbling up to div#wrapper
 		$('#wrapper').on('click', '.character', function () {
+			// click on row1, which cotains character(s)
 			var index = $(this).attr('value');
 	
 			if (gameOver) return;
 			$('#message').empty();
+			// if mainCharacter exists, do nothing
 			if (mainCharacter != null) return;
-
+			// find which character is cliked, and save it in mainCharacter
 			mainCharacter = Object.assign({}, characterArray[index]);
+			// remove this character from characterArray
 			characterArray.splice(index, 1);
+			// pass characterArray to enemyArray, which has all unselected characters now
 			enemyArray = characterArray;
-
+			// clean up row1 and populate it with mainCharacter
 			$('#row1').empty();
 			appendBox($('#row1'), characterClasses, mainCharacter);
-			// give row2 height
+			// give row2 height 
 		    $('#row2').addClass('row-with-height');
+		    // populate row2 with enemyArray
 		    appendBoxes($('#row2'), enemyClasses, enemyArray);
 			
 		});
 	
 		$('#wrapper').on('click', '.enemy', function () {
+			// click on row2, which has enemies
 			var index;
 
 			if (gameOver) return;
 
 			$('#message').empty();
-
+			// if defender exists, don't select any enemy to become defender
 			if (defender != null) return;
-
+			// save selected enemy to become defender
 			index = $(this).attr('value');
 			defender = Object.assign({}, enemyArray[index]);
-
+			// remove selected enemy from enemyArray
 			enemyArray.splice(index, 1);
 
 			$('#row2').empty();
 			$('#row3').empty();
 			if (enemyArray.length > 0) {
+				// populate row2
 				appendBoxes($('#row2'), enemyClasses, enemyArray);
 			}
+			// populate row3 with defender
 			appendBox($('#row3'), defenderClasses, defender);
 
 
 		});
 
 		$('#wrapper').on('click', '.emptyBox', function () {
-
+			// click on empty row3 , display message
 			setMessage(noEnemyMsg);
 			
 		});
 	
 		$('#wrapper').on('click', '#attack', function () {
+			// attack button
 			var msg = '';
 			
 			if (gameOver) return;
 			if (defender == null) {
+				// no defender exists
 				$('#message').empty();
 				setMessage(noEnemyMsg);
 				return;
 			} 
-
+			// game logic here
 			mainCharacter.healthPoint -= defender.counterAttackPower;
 			
 			defender.healthPoint -= mainCharacter.attackPower;
 			msg = createStatMessage(mainCharacter, defender);
 			setMessage(msg);
 			// update mainCharacter and defender's HP in demoBox
+			// to display different HP after each click
 			$('#row1 h4#HP').html(mainCharacter.healthPoint);
 			$('#row3 h4#HP').html(defender.healthPoint);
 			// test win/lose
@@ -278,31 +289,31 @@ $(document).ready(function () {
 			mainCharacter.attackPower += mainCharacter.baseAttackPower;
 
 			if (gameOver) {
+				// add restart buttonId if the game is over
 				var button = createButton(restartId);
 				button.insertAfter($('#message'));
 			}
 		});
 
 		$('#wrapper').on('click', '#restart', function () {
+			// restart button
 			$('#wrapper').empty();
 			initialize();
 		});
 
 		$('#wrapper').on('mouseenter', '.demoBox', function () {
+			// disply actor's name if mouse pointer is inside picture box(demoBox)
 			var titleObj = $(this).children('#title');
 			var imgObj = $(this).children('.img-holder');
 			titleObj.html(imgObj.attr('name'));
 		});
 
 		$('#wrapper').on('mouseleave', '.demoBox', function () {
+			// disply actor's screen name if mouse pointer is outside picture box(demoBox)
 			var titleObj = $(this).children('#title');
 			var imgObj = $(this).children('.img-holder');
 			titleObj.html(imgObj.attr('movie-name'));		
-		});
-
-
-	
-	
+		});	
 
 });
 
