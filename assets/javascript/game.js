@@ -49,7 +49,7 @@ function loadData() {
 							'tuco.jpg',
 							10,
 							5,
-							100);
+							140);
 	var ch3 = new Character('Lee Van Cleef',
 							'Angel',
 							'angel.jpg',
