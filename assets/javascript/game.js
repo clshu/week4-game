@@ -288,6 +288,19 @@ $(document).ready(function () {
 			initialize();
 		});
 
+		$('#wrapper').on('mouseenter', '.demoBox', function () {
+			var titleObj = $(this).children('#title');
+			var imgObj = $(this).children('.img-holder');
+			titleObj.html(imgObj.attr('name'));
+		});
+
+		$('#wrapper').on('mouseleave', '.demoBox', function () {
+			var titleObj = $(this).children('#title');
+			var imgObj = $(this).children('.img-holder');
+			titleObj.html(imgObj.attr('movie-name'));		
+		});
+
+
 	
 	
 
